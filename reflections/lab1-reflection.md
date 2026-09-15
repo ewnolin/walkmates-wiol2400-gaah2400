@@ -7,6 +7,8 @@
 **Pair:** William Olin | Gargaar Ahmed
 **Repo commit/tag:** (link — Labs 1–3; write `N/A` for Lab 4)
 
+**Analysis:** see [`../docs/lab1-analysis.md`](../docs/lab1-analysis.md) (Activities 1.1 and 1.2).
+
 ---
 
 ### 1. What we did
