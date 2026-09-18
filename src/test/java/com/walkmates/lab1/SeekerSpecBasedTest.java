@@ -46,7 +46,7 @@ class SeekerSpecBasedTest {
     @Test
     @DisplayName("Email over 254 chars is rejected")
     void emailTooLongIsRejected() {
-        String longString = "a".repeat(244) + "@email.com";
+        String longString = "a".repeat(245) + "@email.com";
         assertThrows(IllegalArgumentException.class,
                 () -> new Seeker(longString, "William", "0701234567"));
     }
@@ -82,8 +82,8 @@ class SeekerSpecBasedTest {
     @Test
     @DisplayName("International-format phone number is accepted")
     void validInternationalPhoneIsAccepted() {
-        Seeker seeker = new Seeker("william@email.com", "William", "+46701234567");
-        assertThat(seeker.getPhoneNumber()).isEqualTo("+46701234567");
+        Seeker seeker = new Seeker("william@email.com", "William", "+4671234567");
+        assertThat(seeker.getPhoneNumber()).isEqualTo("+4671234567");
     }
 
     @Test
