@@ -45,7 +45,7 @@ class SeekerSpecBasedTest {
     @Test
     @DisplayName("Email over 254 chars is rejected")
     void emailTooLongIsRejected() {
-        String longString = "a".repeat(250) + "@email.com";
+        String longString = "a".repeat(244) + "@email.com";
         assertThrows(IllegalArgumentException.class,
                 () -> new Seeker(longString, "William", "0701234567"));
     }
