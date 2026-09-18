@@ -1,5 +1,6 @@
 package com.walkmates.lab1;
 
+import com.sun.jdi.connect.IllegalConnectorArgumentsException;
 import com.walkmates.model.Seeker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,27 @@ class SeekerSpecBasedTest {
         assertThat(seeker.getBalance()).isEqualTo(Seeker.MAX_SINGLE_TOP_UP);
     }
 
-    // TODO (EP): one valid + one invalid equivalence class for email, name, and phone (FR-1.1).
+    @Test
+    @DisplayName("Well-formed email accepted")
+    void validEmailAtConstruction() {
+        Seeker seeker = new Seeker("william@example.com", "William", "0701234567");
+        assertThat(seeker.getEmail()).isEqualTo("william@example.com");
+    }
+
+    @Test
+    @DisplayName("Malformed email with no domain is rejected")
+    void invalidEmailWithNoDomainIsRejected() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Seeker("notemail", "William", "0701234567"));
+    }
+
+    @Test
+    @DisplayName("Email over 254 chars is rejected")
+    void emailTooLongIsRejected() {
+        String longString = "a".repeat(250) + "@email.com";
+        assertThrows(IllegalArgumentException.class,
+                () -> new Seeker(longString, "William", "0701234567"));
+    }
     // TODO (BVA): just-below / at / just-above the 10.00 minimum top-up (FR-1.3).
     // TODO (BVA): a top-up that would push the balance above 20000.00 is rejected (FR-1.3).
     // TODO (Decision table): expected fee + max-bookings for each trust tier (FR-1.2).
