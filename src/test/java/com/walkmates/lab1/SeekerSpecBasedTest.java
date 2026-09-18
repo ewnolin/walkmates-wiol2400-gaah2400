@@ -49,6 +49,28 @@ class SeekerSpecBasedTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new Seeker(longString, "William", "0701234567"));
     }
+
+    @Test
+    @DisplayName("Valid display name is accepted")
+    void validDisplayNameIsAccepted() {
+        Seeker seeker = new Seeker("william@email.com", "William Olin", "0701234567");
+        assertThat(seeker.getDisplayName()).isEqualTo("William Olin");
+    }
+
+    @Test
+    @DisplayName("Display name shorter than 2 characters is rejected")
+    void displayNameTooShortIsRejected() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Seeker("william@email.com", "A", "0701234567"));
+    }
+
+    @Test
+    @DisplayName("Display name with disallowed characters is rejected")
+    void displayNameInvalidCharactersIsRejected() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Seeker("william@email.com", "Gar1", "0701234567"));
+    }
+
     // TODO (BVA): just-below / at / just-above the 10.00 minimum top-up (FR-1.3).
     // TODO (BVA): a top-up that would push the balance above 20000.00 is rejected (FR-1.3).
     // TODO (Decision table): expected fee + max-bookings for each trust tier (FR-1.2).
