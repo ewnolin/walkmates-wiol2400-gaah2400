@@ -1,8 +1,5 @@
 # Lab Reflection — WalkMates
 
-> One per lab. Keep it **short and specific** — this is graded for *understanding*, not length.
-> Half a page to a page is plenty. Bullet points are fine.
-
 **Lab:** 1
 **Pair:** William Olin | Gargaar Ahmed
 **Repo commit/tag:** (link — Labs 1–3; write `N/A` for Lab 4)
