@@ -40,3 +40,19 @@ equivalence classes matter, whether coverage was "enough", whether a mutant was 
 If you had another hour, what's the next test or risk you'd go after?
 
 ---
+
+### Table created
+
+| #  | Attribute | Class | Representive Input | Expected outcome |
+|---|---|---|---|---|
+| 1 | Email | Valid | "william@example.com" | Seeker constructed |
+| 2 | Email | Invalid -- malformed (no domain) | "notemail" | `IllegalArgumentException` |
+| 3 | Email | Invalid -- too long | _Check implementation_ | `IllegalArgumentException` |
+| 4 | Display name | Valid | "William Olin" | Seeker constructed |
+| 5 | Display name | Invalid -- Too short | "A" | `IllegalArgumentException` |
+| 6 | Display name | Invalid -- disallowed char | "GAR1" | `IllegalArgumentException` |
+| 7 | Phone | Valid | "0701234567" | Seeker constructed |
+| 8 | Phone | Valid | "+46701234567" | Seeker constructed |
+| 9 | Phone | Invalid | "12345" | `IllegalArgumentException` |
+| 10 | Wallet top-up | Valid | 100.00 | Balance increases by `100.00` |
+| 11 | Wallet top-up | Invalid -- below minimum | 5.00 | `IllegalArgumentException` |
