@@ -1,0 +1,51 @@
+Lab 3 test run evidence
+=======================
+
+Date: 2026-10-09
+Command: mvn clean test
+Java: OpenJDK 21.0.12.1 (Microsoft build), via Maven toolchain
+Maven: Apache Maven 3.10.0
+
+Full suite result (all modules, lab1 + lab2 + lab3)
+----------------------------------------------------
+Tests run: 88, Failures: 0, Errors: 0, Skipped: 2
+BUILD SUCCESS
+
+Lab 3 test classes only:
+- MatchControllerFallbackWebTest: Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+- MatchControllerWebTest:         Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+- MatchExplanationServiceTest:    Tests run: 39, Failures: 0, Errors: 0, Skipped: 2
+
+Note on a test-code fix made before this run
+----------------------------------------------
+Before this clean run, MatchExplanationServiceTest had its @Disabled annotations
+on descriptionCannotCloseTheDataBlock and injectionInTitleStaysInsideTheDataBlock
+commented out (as "//    @Disabled(...)") instead of active. That meant the two
+tests were actually running (not skipped), and both failed, matching exactly the
+"KNOWN GAP" reasons already written in their own comments (the delimiter/title
+handling gaps described below). This looked like a leftover from editing, not a
+production bug, so I restored the @Disabled annotations (uncommented them,
+keeping the reason text unchanged) rather than touching src/main. See the two
+assertion messages below for what those tests report when enabled.
+
+Step 3: real assertion messages with @Disabled temporarily removed
+--------------------------------------------------------------------
+Command: mvn test -Dtest=MatchExplanationServiceTest
+(run with @Disabled temporarily removed from just these two tests, then restored)
+
+Result of that run: Tests run: 39, Failures: 2, Errors: 0, Skipped: 0
+
+1) descriptionCannotCloseTheDataBlock
+   org.opentest4j.AssertionFailedError:
+   expected: 1
+    but was: 2
+
+2) injectionInTitleStaysInsideTheDataBlock
+   java.lang.AssertionError:
+   Expecting actual:
+     346
+   to be greater than:
+     399
+
+After recording these, git diff confirmed the file was unchanged apart from the
+@Disabled fix described above.
